@@ -1,0 +1,73 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<div class="table-container" *ngIf="!cargando && medicamentos.length > 0">
+  <table class="productos-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Laboratorio</th>
+        <th>Fecha fabricación</th>
+        <th>Fecha vencimiento</th>
+        <th>Cantidad en Stock</th>
+        <th>Valor Unitario</th>
+        <th>Vender</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let med of medicamentos">
+        <td>{{ med.nombre }}</td>
+        <td>{{ med.laboratorio }}</td>
+        <td>{{ med.fechaFabricacion }}</td>
+        <td>{{ med.fechaVencimiento }}</td>
+        <td>{{ med.cantidadStock }}</td>
+        <td>{{ med.valorUnitario | currency:'COP':'symbol':'1.0-0' }}</td>
+        <td><i class="bi bi-bag-heart iconVender" (click)="venderMedicamento(med)"></i></td>
+        <td><i class="bi bi-pencil-square iconEditar" (click)="abrirModalEditar(med)"></i></td>
+        <td><i class="bi bi-trash iconEliminar" (click)="eliminarMedicamento(med)"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="cargando">Cargando medicamentos...</div>
+<div *ngIf="!cargando && medicamentos.length === 0">No hay medicamentos disponibles</div>
+<div *ngIf="error">{{ error }}</div>
+
+<!-- Modal edición -->
+<div class="modal" *ngIf="modalEditarVisible">
+  <div class="modal-content">
+    <span class="close" (click)="cancelarEditar()">&times;</span>
+    <h2>Editar Medicamento</h2>
+    <form (ngSubmit)="guardarEdicion()">
+      <div class="InfoMedicamento">
+        <div class="infoMed">
+          <label for="nombreEdit">Nombre</label>
+          <input id="nombreEdit" type="text" [(ngModel)]="medicamentoAEditar!.nombre" name="nombreEdit" required>
+        </div>
+        <div class="infoMed">
+          <label for="laboratorioEdit">Laboratorio de fábrica</label>
+          <input id="laboratorioEdit" type="text" [(ngModel)]="medicamentoAEditar!.laboratorio" name="laboratorioEdit" required>
+        </div>
+        <div class="infoMed">
+          <label for="fechaFabEdit">Fecha de fabricación</label>
+          <input id="fechaFabEdit" type="date" [(ngModel)]="medicamentoAEditar!.fechaFabricacion" name="fechaFabEdit" required>
+        </div>
+        <div class="infoMed">
+          <label for="fechaVenEdit">Fecha de vencimiento</label>
+          <input id="fechaVenEdit" type="date" [(ngModel)]="medicamentoAEditar!.fechaVencimiento" name="fechaVenEdit" required>
+        </div>
+        <div class="infoMed">
+          <label for="cantidadEdit">Cantidad en stock</label>
+          <input id="cantidadEdit" type="number" [(ngModel)]="medicamentoAEditar!.cantidadStock" name="cantidadEdit" required>
+        </div>
+        <div class="infoMed">
+          <label for="valorEdit">Valor unitario</label>
+          <input id="valorEdit" type="number" [(ngModel)]="medicamentoAEditar!.valorUnitario" name="valorEdit" required>
+        </div>
+      </div>
+      <button type="submit" class="btnGuardar">Guardar</button>
+    </form>
+  </div>
+</div>

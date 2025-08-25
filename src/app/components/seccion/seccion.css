@@ -1,0 +1,119 @@
+.seccion{
+    display: flex;
+    justify-content: space-evenly
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    margin: 20px 0 0 5px;
+  max-width: 500px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 2px solid #4CAF50;
+  border-radius: 25px 0 0 25px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #388E3C;
+  box-shadow: 0 0 8px rgba(56, 142, 60, 0.5);
+}
+
+.search-button {
+  padding: 10px 20px;
+  border: 2px solid #4CAF50;
+  border-left: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 0 25px 25px 0;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #388E3C;
+  border-color: #388E3C;
+}
+
+.btnCrear {
+        margin: 20px 0 0 112px;
+  background-color: #4CAF50; /* verde bonito */
+  color: white;              /* texto blanco */
+  padding: 12px 25px;        /* tamaño del botón */
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;              /* quitar borde por defecto */
+  border-radius: 25px;       /* bordes redondeados */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* sombra ligera */
+}
+
+.btnCrear:hover {
+  background-color: #388E3C; /* verde más oscuro al pasar el mouse */
+  transform: translateY(-2px); /* efecto de “subida” */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* sombra más marcada */
+}
+
+.btnCrear:active {
+  transform: translateY(0); /* vuelve a su posición al hacer clic */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+    width: 600px;
+    height: 200px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.close {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btnGuardar {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 10px 0 0 260px;
+}
+
+label{
+    margin: 2px 2px;
+}
+.InfoMedicamento{
+    display: flex;
+    flex-wrap: wrap;
+}
+.infoMed{
+    margin: 10px 20px 0px 0px;
+}
+h2{
+    text-align: center;
+}

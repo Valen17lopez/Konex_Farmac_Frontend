@@ -1,11 +1,22 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { Header } from './components/header/header';
+import { Seccion } from './components/seccion/seccion';
+import { TableContainer } from './components/table-container/table-container';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [
+    Header,
+    Seccion,
+    TableContainer,
+    FormsModule,
+    HttpClientModule // <-- Esto es clave
+  ],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
   protected readonly title = signal('CRUD-Drogueria');

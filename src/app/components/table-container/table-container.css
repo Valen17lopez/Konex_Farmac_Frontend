@@ -1,0 +1,147 @@
+/* Contenedor para que la tabla sea responsiva */
+.table-container {
+    margin: 15px 0 0 0;
+  overflow-x: auto;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+/* Tabla */
+.productos-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Cabecera */
+.productos-table thead {
+  background-color: #4CAF50; /* verde bonito */
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Celdas */
+.productos-table th,
+.productos-table td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.95rem;
+}
+
+/* Filas alternadas y hover */
+.productos-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.productos-table tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s ease;
+}
+
+/* Iconos (Vender, Editar, Eliminar) */
+.iconVender {
+  color: #4CAF50; /* verde */
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.iconVender:hover {
+  transform: scale(1.3);
+  color: #388E3C;
+}
+
+.iconEditar {
+  color: #FFC107; /* amarillo */
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.iconEditar:hover {
+  transform: scale(1.3);
+  color: #FFA000;
+}
+
+.iconEliminar {
+  color: #F44336; /* rojo */
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.iconEliminar:hover {
+  transform: scale(1.3);
+  color: #D32F2F;
+}
+
+/* Responsive: reduce padding y tamaño de fuente en pantallas pequeñas */
+@media (max-width: 768px) {
+  .productos-table th,
+  .productos-table td {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+
+  .iconVender,
+  .iconEditar,
+  .iconEliminar {
+    font-size: 1.2rem;
+  }
+}
+
+/* Fondo del modal */
+.modal {
+  position: fixed; /* Fijo en la pantalla */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5); /* Fondo semitransparente */
+  display: flex;
+  justify-content: center; /* Centrar horizontal */
+  align-items: center;     /* Centrar vertical */
+  z-index: 1000;           /* Que quede encima de todo */
+}
+
+/* Contenido del modal */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+/* Botón de cerrar */
+.modal-content .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+.btnGuardar{
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 10px 0 0 225px;
+}
+h2{
+    text-align: center;
+}
+label{
+    margin: 8px;
+}
+.infoMed{
+    margin: 15px 0;
+    /* text-align: center; */
+}

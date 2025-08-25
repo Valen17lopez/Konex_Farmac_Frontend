@@ -1,0 +1,47 @@
+<div class="seccion">
+  <!-- Barra de búsqueda -->
+  <div class="search-container">
+    <input type="text" placeholder="Buscar medicamentos..." [(ngModel)]="busqueda" class="search-input" />
+    <button class="search-button" (click)="buscarMedicamento()">🔍</button>
+  </div>
+
+  <!-- Botón Crear Medicamentos -->
+  <button class="btnCrear" (click)="abrirModal()">Crear Medicamentos</button>
+
+  <!-- Modal Crear -->
+  <div class="modal" *ngIf="modalVisible">
+    <div class="modal-content">
+      <span class="close" (click)="cerrarModal()">&times;</span>
+      <h2>Crear Medicamento</h2>
+      <form (ngSubmit)="guardarMedicamento()">
+        <div class="InfoMedicamento">
+          <div class="infoMed">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" [(ngModel)]="nuevoMedicamento.nombre" name="nombre" required>
+          </div>
+          <div class="infoMed">
+            <label for="laboratorio">Laboratorio de fábrica</label>
+            <input type="text" id="laboratorio" [(ngModel)]="nuevoMedicamento.laboratorio" name="laboratorio" required>
+          </div>
+          <div class="infoMed">
+            <label for="fechaFab">Fecha de fabricación</label>
+            <input type="date" id="fechaFab" [(ngModel)]="nuevoMedicamento.fechaFabricacion" name="fechaFab" required>
+          </div>
+          <div class="infoMed">
+            <label for="fechaVen">Fecha de vencimiento</label>
+            <input type="date" id="fechaVen" [(ngModel)]="nuevoMedicamento.fechaVencimiento" name="fechaVen" required>
+          </div>
+          <div class="infoMed">
+            <label for="cantidad">Cantidad en stock</label>
+            <input type="number" id="cantidad" [(ngModel)]="nuevoMedicamento.cantidadStock" name="cantidad" required>
+          </div>
+          <div class="infoMed">
+            <label for="valor">Valor unitario</label>
+            <input type="number" id="valor" [(ngModel)]="nuevoMedicamento.valorUnitario" name="valor" required>
+          </div>
+        </div>
+        <button type="submit" class="btnGuardar">Guardar</button>
+      </form>
+    </div>
+  </div>
+</div>
