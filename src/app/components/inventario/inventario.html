@@ -1,0 +1,48 @@
+<button class="btn-consultar" (click)="abrirModal()">Consultar Inventario</button>
+
+<div class="modal" *ngIf="modalVisible">
+  <div class="modal-content">
+    <span class="close" (click)="cerrarModal()">&times;</span>
+    <h2>Inventario de Ventas</h2>
+
+    <!-- Filtro por fechas -->
+    <div class="filtro-fechas">
+      <label>
+        Fecha Inicio:
+        <input type="date" [(ngModel)]="fechaInicio">
+      </label>
+      <label>
+        Fecha Fin:
+        <input type="date" [(ngModel)]="fechaFin">
+      </label>
+      <button (click)="filtrarPorFechas()">Filtrar</button>
+      <button (click)="limpiarFiltro()">Limpiar</button>
+    </div>
+
+    <!-- Tabla de ventas -->
+    <table *ngIf="!cargando && ventasFiltradas.length > 0">
+      <thead>
+        <tr>
+          <th>Fecha y Hora</th>
+          <th>Medicamento</th>
+          <th>Cantidad</th>
+          <th>Valor Unitario</th>
+          <th>Valor Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let venta of ventasFiltradas">
+          <td>{{ venta.fechaHora }}</td>
+          <td>{{ getNombreMedicamento(venta.idMedicamento) }}</td>
+          <td>{{ venta.cantidad }}</td>
+          <td>{{ venta.valorUnitario | currency:'COP':'symbol':'1.0-0' }}</td>
+          <td>{{ venta.valorTotal | currency:'COP':'symbol':'1.0-0' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p *ngIf="cargando">Cargando ventas...</p>
+    <p *ngIf="!cargando && ventasFiltradas.length === 0">No hay ventas registradas.</p>
+    <p *ngIf="error">{{ error }}</p>
+  </div>
+</div>

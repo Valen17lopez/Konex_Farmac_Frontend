@@ -1,12 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { Medicamento, MedicamentoService } from '../../servicios/medicamento';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'; // ✅ Importar HttpClientModule
+import { Medicamento, MedicamentoService } from '../../servicios/medicamento';
+import { VentaComponent } from '../venta/venta';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table-container',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HttpClientModule, // ✅ Agregado para que funcione HttpClient
+    VentaComponent
+  ],
   templateUrl: './table-container.html',
   styleUrls: ['./table-container.css']
 })
@@ -16,18 +24,23 @@ export class TableContainer implements OnInit {
   cargando: boolean = false;
   error: string = '';
 
-  // Para modal de edición
+  // Modal de edición
   modalEditarVisible = false;
   medicamentoAEditar: Medicamento | null = null;
 
-  constructor(private medicamentoService: MedicamentoService) { }
+  // Referencia al componente de venta
+  @ViewChild(VentaComponent) ventaComponent!: VentaComponent;
+
+  constructor(
+    private medicamentoService: MedicamentoService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.cargarMedicamentos();
 
-    // Escuchar evento global de creación
+    // Escuchar eventos globales
     window.addEventListener('medicamentoCreado', () => this.cargarMedicamentos());
-    // Escuchar evento global de filtrado
     window.addEventListener('medicamentoFiltrado', (event: any) => {
       this.medicamentos = event.detail;
     });
@@ -36,15 +49,23 @@ export class TableContainer implements OnInit {
   cargarMedicamentos() {
     this.cargando = true;
     this.medicamentoService.getAll().subscribe({
-      next: (data) => { this.medicamentos = data; this.cargando = false; },
-      error: (err) => { this.error = 'No se pudieron cargar los medicamentos'; this.cargando = false; }
+      next: (data) => { 
+        this.medicamentos = data; 
+        this.cargando = false; 
+      },
+      error: () => { 
+        this.error = 'No se pudieron cargar los medicamentos'; 
+        this.cargando = false; 
+      }
     });
   }
 
+  // Abrir modal de venta
   venderMedicamento(med: Medicamento) {
-    console.log('Vender medicamento:', med);
+    this.ventaComponent?.abrirModal(med);
   }
 
+  // Modal edición
   abrirModalEditar(med: Medicamento) {
     this.medicamentoAEditar = { ...med };
     this.modalEditarVisible = true;
@@ -56,24 +77,25 @@ export class TableContainer implements OnInit {
   }
 
   guardarEdicion() {
-    if (!this.medicamentoAEditar || !this.medicamentoAEditar.id) return;
-
+    if (!this.medicamentoAEditar?.id) return;
     this.medicamentoService.update(this.medicamentoAEditar.id, this.medicamentoAEditar).subscribe({
-      next: () => {
-        this.cargarMedicamentos();
-        this.cancelarEditar();
+      next: () => { 
+        this.cargarMedicamentos(); 
+        this.cancelarEditar(); 
       },
       error: (err) => console.error('Error al editar medicamento:', err)
     });
   }
 
+  // Eliminar medicamento
   eliminarMedicamento(med: Medicamento) {
     if (!med.id) return;
     if (!confirm(`¿Deseas eliminar "${med.nombre}"?`)) return;
-
     this.medicamentoService.delete(med.id).subscribe({
       next: () => this.medicamentos = this.medicamentos.filter(m => m.id !== med.id),
-      error: (err) => alert('No se pudo eliminar el medicamento.')
+      error: () => alert('No se pudo eliminar el medicamento.')
     });
   }
+
+
 }

@@ -1,11 +1,16 @@
-// src/main.ts
+// main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
+import { App } from './app/app';
 import { importProvidersFrom } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { App } from './app/app'; // Ajusta la ruta si tu app.ts está en otra carpeta
+import { routes } from './app/app.routes';
 
 bootstrapApplication(App, {
   providers: [
-    importProvidersFrom(HttpClientModule) // Esto permite que tu MedicamentoService use HttpClient
+    importProvidersFrom(
+      RouterModule.forRoot(routes),
+      HttpClientModule // ✅ Aquí se registra HttpClient a nivel global
+    )
   ]
 }).catch(err => console.error(err));

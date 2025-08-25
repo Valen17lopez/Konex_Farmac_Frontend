@@ -1,0 +1,29 @@
+<div class="modal" *ngIf="medicamentoSeleccionado">
+  <div class="modal-content">
+    <span class="close" (click)="cerrarModal()">&times;</span>
+    <h2>Venta</h2>
+
+    <div class="info-medicamento">
+      <p><strong>Nombre:</strong> {{ medicamentoSeleccionado.nombre }}</p>
+      <p>
+        <strong>Precio:</strong> 
+        {{ medicamentoSeleccionado.valorUnitario | currency:'COP':'symbol':'1.0-0' }}
+      </p>
+      <p>
+        <strong>Cantidad:</strong>
+        <button type="button" (click)="decrementar()">-</button>
+        {{ cantidadVenta }}
+        <button type="button" (click)="incrementar()">+</button>
+      </p>
+      <p>
+        <strong>Valor total:</strong> 
+        {{ valorTotal | currency:'COP':'symbol':'1.0-0' }}
+      </p>
+    </div>
+
+    <div class="acciones">
+      <button type="button" (click)="cerrarModal()">Cancelar</button>
+      <button type="button" (click)="confirmarVenta()">Confirmar</button>
+    </div>
+  </div>
+</div>
